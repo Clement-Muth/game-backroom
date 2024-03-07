@@ -14,12 +14,11 @@ export default () => {
     "./public/static/music/government-funding.mp3",
   );
   const audioEntity = new Entity();
-
-  audioEntity.addComponent(audioComponent);
-  gameEngine.addEntity(audioEntity);
-
   const audioSystem = new AudioSystem();
 
+  audioEntity.addComponent(audioComponent);
+
+  gameEngine.addEntity(audioEntity);
   gameEngine.addSystem(canvasResizeSystem);
   gameEngine.addSystem(audioSystem);
   gameEngine.addEntity(new SquareEntity(50, 50, "red", 50, 50));
