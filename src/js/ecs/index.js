@@ -1,28 +1,52 @@
-import AudioComponent from "./components/audioComponent.js";
-import Entity from "./entities/entity.js";
-import SquareEntity from "./entities/squareEntity.js";
-import GameEngine from "./gameEngine.js";
-import AudioSystem from "./systems/audioSystem.js";
-import CanvasResizeSystem from "./systems/canvasResizeSystem.js";
-import RenderSystem from "./systems/renderSystem.js";
+import {
+  Application,
+  Assets,
+  Container,
+  Texture,
+  TilingSprite,
+} from "../../libraries/pixijs.js";
 
-export default () => {
-  const canvas = document.getElementById("game-engine-canvas");
-  const gameEngine = new GameEngine(canvas);
-  const canvasResizeSystem = new CanvasResizeSystem(canvas);
-  const audioComponent = new AudioComponent(
-    "./public/static/music/government-funding.mp3",
-  );
-  const audioEntity = new Entity();
-  const audioSystem = new AudioSystem();
+export class Scene {
+  constructor(width) {
+    this.view = new Container();
 
-  audioEntity.addComponent(audioComponent);
+    const backgroundTexture = Texture.from("background");
 
-  gameEngine.addEntity(audioEntity);
-  gameEngine.addSystem(canvasResizeSystem);
-  gameEngine.addSystem(audioSystem);
-  gameEngine.addEntity(new SquareEntity(50, 50, "red", 50, 50));
-  gameEngine.addSystem(new RenderSystem(canvas));
+    const scale = 0.8240384615384616;
 
-  gameEngine.start();
-};
+    const baseOptions = {
+      tileScale: { x: scale, y: scale },
+      anchor: { x: 0, y: 1 },
+      applyAnchorToTexture: true,
+    };
+
+    this.background = new TilingSprite({
+      texture: backgroundTexture,
+      width,
+      height: backgroundTexture.height * scale,
+      ...baseOptions,
+    });
+
+    this.view.addChild(this.background);
+  }
+}
+
+(async () => {
+  const app = new Application();
+  await app.init({ background: "white", resizeTo: window });
+
+  document.body.appendChild(app.canvas);
+
+  await Assets.load([
+    {
+      alias: "background",
+      src: "/public/static/images/menu/menu.jpg",
+    },
+  ]);
+
+  const scene = new Scene(app.screen.width, app.screen.height);
+
+  scene.view.y = app.screen.height;
+
+  app.stage.addChild(scene.view);
+})();
