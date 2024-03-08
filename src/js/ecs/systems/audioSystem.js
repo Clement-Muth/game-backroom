@@ -5,7 +5,11 @@ export default class AudioSystem extends System {
     for (const entity of entities) {
       const audioComponent = entity.getComponent("AudioComponent");
 
-      if (audioComponent?.audio.paused) audioComponent.audio.play();
+      if (audioComponent?.audio.paused) {
+        document.addEventListener("click", () => {
+          audioComponent.audio.play();
+        });
+      }
     }
   };
 }
