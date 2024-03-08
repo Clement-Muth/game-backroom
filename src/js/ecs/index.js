@@ -1,50 +1,52 @@
-import AudioComponent from "./components/audioComponent.js";
-import SceneComponent from "./components/sceneComponent.js";
-import Entity from "./entities/entity.js";
-import SquareEntity from "./entities/squareEntity.js";
-import GameEngine from "./gameEngine.js";
-import AudioSystem from "./systems/audioSystem.js";
-import ButtonClickSystem from "./systems/buttonClickSystem.js";
-import CanvasResizeSystem from "./systems/canvasResizeSystem.js";
-import RenderSystem from "./systems/renderSystem.js";
-import SceneSystem from "./systems/sceneSystem.js";
+import {
+  Application,
+  Assets,
+  Container,
+  Texture,
+  TilingSprite,
+} from "../../libraries/pixijs.js";
 
-export default () => {
-  const canvas = document.getElementById("game-engine-canvas");
-  const gameEngine = new GameEngine(canvas);
-  const canvasResizeSystem = new CanvasResizeSystem(canvas);
-  const audioComponent = new AudioComponent(
-    "./public/static/music/government-funding.mp3",
-  );
+export class Scene {
+  constructor(width) {
+    this.view = new Container();
 
-  const squareEntity = new SquareEntity(50, 50, 10, 10, "orange");
+    const backgroundTexture = Texture.from("background");
 
-  const audioEntity = new Entity();
-  const audioSystem = new AudioSystem();
+    const scale = 0.8240384615384616;
 
-  const loadingSceneComponent = new SceneComponent("loadingScene");
-  const loadingSceneEntity = new Entity();
-  const sceneSystem = new SceneSystem();
+    const baseOptions = {
+      tileScale: { x: scale, y: scale },
+      anchor: { x: 0, y: 1 },
+      applyAnchorToTexture: true,
+    };
 
-  const menuSceneComponent = new SceneComponent("menuScene");
-  const menuSceneEntity = new Entity();
+    this.background = new TilingSprite({
+      texture: backgroundTexture,
+      width,
+      height: backgroundTexture.height * scale,
+      ...baseOptions,
+    });
 
-  loadingSceneEntity.addComponent(loadingSceneComponent);
-  menuSceneEntity.addComponent(menuSceneComponent);
-  audioEntity.addComponent(audioComponent);
+    this.view.addChild(this.background);
+  }
+}
 
-  gameEngine.addEntity(squareEntity);
-  gameEngine.addEntity(audioEntity);
-  gameEngine.addSystem(canvasResizeSystem);
-  gameEngine.addSystem(audioSystem);
-  gameEngine.addSystem(new RenderSystem(canvas));
+(async () => {
+  const app = new Application();
+  await app.init({ background: "white", resizeTo: window });
 
-  const buttonClickSystem = new ButtonClickSystem(
-    canvas,
-    sceneSystem,
-    squareEntity,
-  );
-  gameEngine.addSystem(buttonClickSystem);
+  document.body.appendChild(app.canvas);
 
-  gameEngine.start();
-};
+  await Assets.load([
+    {
+      alias: "background",
+      src: "/public/static/images/menu/menu.jpg",
+    },
+  ]);
+
+  const scene = new Scene(app.screen.width, app.screen.height);
+
+  scene.view.y = app.screen.height;
+
+  app.stage.addChild(scene.view);
+})();
