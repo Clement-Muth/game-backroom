@@ -1,32 +1,30 @@
-import { Application, Assets } from "../../libraries/pixijs.js";
+// export default class GameEngine {
+//   constructor() {
+//     this.app = new Application();
+//   }
 
-export default class GameEngine {
-  constructor() {
-    this.app = new Application();
-  }
+//   init = async () => {
+//     await this.app.init({ background: "transparent", resizeTo: document });
 
-  init = async () => {
-    await this.app.init({ background: "transparent", resizeTo: document });
+//     this.ticker = this.app.ticker;
+//     this.app.renderer.resize(window.innerWidth, window.innerHeight);
 
-    this.ticker = this.app.ticker;
-    this.app.renderer.resize(window.innerWidth, window.innerHeight);
+//     document.body.appendChild(this.app.canvas);
 
-    document.body.appendChild(this.app.canvas);
+//     await Assets.load([
+//       {
+//         alias: "background",
+//         src: "/public/static/images/menu/menu.jpg",
+//       },
+//     ]);
 
-    await Assets.load([
-      {
-        alias: "background",
-        src: "/public/static/images/menu/menu.jpg",
-      },
-    ]);
+//     return this;
+//   };
 
-    return this;
-  };
-
-  addScene = (scene) => {
-    this.app.stage.addChild(scene);
-  };
-  removeScene = () => {
-    this.app.stage.removeChildren();
-  };
-}
+//   addScene = (scene) => {
+//     this.app.stage.addChild(scene);
+//   };
+//   removeScene = () => {
+//     this.app.stage.removeChildren();
+//   };
+// }
