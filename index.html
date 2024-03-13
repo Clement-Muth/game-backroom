@@ -4,12 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+    </style>
     <link rel="stylesheet" href="./src/css/globals.css">
+    <link rel="stylesheet" href="./src/css/vhs.css">
     <link rel="icon" type="image/x-icon" href="/public/static/icon.ico">
     <title>Backroom</title>
 </head>
 
 <body onload="import('./src/js/ecs/index.js')">
+    <main>
+        <div class="scanlines"></div>
+
+        <div class="intro-wrap"
+            style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; width: 80%; margin: auto; height: 90%; z-index: 10000;">
+            <div class="noise"></div>
+            <div class="noise noise-moving"></div>
+
+            <div class="play" data-splitting>
+                Play >
+            </div>
+            <div class="time">00:00</div>
+            <div class="recordSpeed date">09. MARS 2024</div>
+        </div>
+    </main>
 </body>
 
 </html>

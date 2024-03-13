@@ -1,20 +1,32 @@
+import { Application, Assets } from "../../libraries/pixijs.js";
+
 export default class GameEngine {
-  constructor(canvas) {
-    this.canvas = canvas;
-    this.ctx = canvas.getContext("2d");
-    this.entities = [];
-    this.systems = [];
+  constructor() {
+    this.app = new Application();
   }
 
-  addEntity = (entity) => this.entities.push(entity);
+  init = async () => {
+    await this.app.init({ background: "transparent", resizeTo: document });
 
-  addSystem = (system) => this.systems.push(system);
+    this.ticker = this.app.ticker;
+    this.app.renderer.resize(window.innerWidth, window.innerHeight);
 
-  update() {
-    for (const system of this.systems) system.update(this.entities);
+    document.body.appendChild(this.app.canvas);
 
-    requestAnimationFrame(this.update.bind(this));
-  }
+    await Assets.load([
+      {
+        alias: "background",
+        src: "/public/static/images/menu/menu.jpg",
+      },
+    ]);
 
-  start = () => this.update();
+    return this;
+  };
+
+  addScene = (scene) => {
+    this.app.stage.addChild(scene);
+  };
+  removeScene = () => {
+    this.app.stage.removeChildren();
+  };
 }
