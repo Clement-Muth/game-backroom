@@ -1,8 +1,6 @@
-import { Text as TextPixi } from "../../../libraries/pixijs.js";
-
-export default class Text extends TextPixi {
+export default class Text {
   constructor(...props) {
-    super(...props);
+    // super(...props);
 
     this.anchor.set(0, 0.5);
     this.resolution = 8;
