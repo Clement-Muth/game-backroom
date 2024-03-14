@@ -9,7 +9,8 @@ import Text from "./components/text.js";
 
   const menu = new Container();
 
-  menu.position.set({ x: 200, y: 100 });
+  menu.x = 500;
+  menu.y = 200;
 
   const hello = new Text({
     text: "Hello",
@@ -24,7 +25,7 @@ import Text from "./components/text.js";
     },
   });
 
-  world.y = 100;
+  world.y = 25;
   world.interactive = true;
 
   menu.addChild(hello).addChild(world);
