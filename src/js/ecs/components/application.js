@@ -24,6 +24,8 @@ export default class Application {
 
   addChild(child) {
     this.children.push(child);
+
+    return this;
   }
 
   onResize() {
