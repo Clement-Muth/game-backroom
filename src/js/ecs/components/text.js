@@ -1,24 +1,37 @@
+export class TextStyle {
+  constructor() {
+    this.align = "left";
+    this.fill = "white";
+    this.fontFamily = "Arial";
+    this.fontSize = 24;
+    this.fontWeight = "normal";
+  }
+}
+
 export default class Text {
-  constructor(...props) {
-    // super(...props);
-
-    this.anchor.set(0, 0.5);
-    this.resolution = 8;
-    this.fontSize = 32;
-    this.position.set(0, -200);
-    this.interactive = true;
-    this.click = (e) => {
-      console.log("do something you want");
-      console.log(e);
-    };
-    this.buttonMode = true;
-    this.eventMode = "static";
-    this.cursor = "pointer";
-
-    console.log(this);
+  constructor({ text, style }) {
+    this.x = 50;
+    this.y = 50;
+    this.text = text;
+    this.interactive = false;
+    this._style = { ...new TextStyle(), ...style };
   }
 
-  onClick = (callback) => {
-    this.on("pointerdown", callback);
-  };
+  render(ctx) {
+    ctx.font = `${this._style.fontWeight} ${this._style.fontSize}px ${this._style.fontFamily}`;
+    ctx.fillStyle = this._style.fill;
+    ctx.textAlign = this._style.align;
+    ctx.fillText(this.text, this.x, this.y);
+  }
+
+  isMouseOver(x, y, ctx) {
+    const width = ctx.measureText(this.text).width;
+
+    return (
+      x >= this.x &&
+      x <= this.x + width &&
+      y >= this.y - this._style.fontSize &&
+      y <= this.y
+    );
+  }
 }
