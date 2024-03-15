@@ -9,9 +9,14 @@ export default class Application {
     this.stage = new Container(this.ctx, { isStage: true });
     this.children = [];
     this.screen = { width: window.innerWidth, height: window.innerHeight };
+    this._mouseX = 0;
+    this._mouseY = 0;
 
     canvas.addEventListener("mousemove", (e) =>
-      this.handleMouseMove(e, this.children, []),
+      this._onMouseMove(e, this.children, []),
+    );
+    canvas.addEventListener("click", (e) =>
+      this._onClick(e, this.children, []),
     );
     canvas.id = "canvas";
     document.body.appendChild(canvas);
@@ -44,26 +49,33 @@ export default class Application {
     requestAnimationFrame(this._loop.bind(this));
   }
 
-  handleMouseMove(event, children, parents = []) {
-    const mouseX = event.clientX - this.canvas.getBoundingClientRect().left;
-    const mouseY = event.clientY - this.canvas.getBoundingClientRect().top;
+  _onMouseMove(event, children, parents = []) {
+    this._mouseX = event.clientX - this.canvas.getBoundingClientRect().left;
+    this._mouseY = event.clientY - this.canvas.getBoundingClientRect().top;
 
     for (const child of children) {
       if (child instanceof Container) {
-        return this.handleMouseMove(
-          event,
-          child.children,
-          parents.concat(child),
-        );
+        return this._onMouseMove(event, child.children, parents.concat(child));
       }
       if (
         child.interactive &&
-        child.isMouseOver(mouseX, mouseY, this.ctx, parents)
+        child.isMouseOver(this._mouseX, this._mouseY, this.ctx, parents)
       ) {
         this.canvas.style.cursor = "pointer";
         return;
       }
     }
     this.canvas.style.cursor = "default";
+  }
+
+  _onClick(event, children, parents = []) {
+    for (const child of children) {
+      if (child instanceof Container) {
+        return this._onClick(event, child.children, parents.concat(child));
+      }
+      if (child.interactive === true && typeof child._onClick === "function") {
+        child._onClick(this._mouseX, this._mouseY, this.ctx, parents);
+      }
+    }
   }
 }
