@@ -18,22 +18,26 @@ export default class Text {
     this._style = { ...new TextStyle(), ...style };
   }
 
-  render(ctx, parent) {
-    this.parent = { x: parent.x, y: parent.y };
+  render(ctx, parents) {
+    const absoluteX = parents.reduce((acc, parent) => acc + parent.x, 0);
+    const absoluteY = parents.reduce((acc, parent) => acc + parent.y, 0);
+
     ctx.font = `${this._style.fontWeight} ${this._style.fontSize}px ${this._style.fontFamily}`;
     ctx.fillStyle = this._style.fill;
     ctx.textAlign = this._style.align;
-    ctx.fillText(this.text, parent.x + this.x, parent.y + this.y);
+    ctx.fillText(this.text, absoluteX + this.x, absoluteY + this.y);
   }
 
-  isMouseOver(x, y, ctx) {
+  isMouseOver(x, y, ctx, parents) {
+    const absoluteX = parents.reduce((acc, parent) => acc + parent.x, 0);
+    const absoluteY = parents.reduce((acc, parent) => acc + parent.y, 0);
     const width = ctx.measureText(this.text).width;
 
     return (
-      x >= this.x + this.parent.x &&
-      x <= this.x + this.parent.x + width &&
-      y >= this.y + this.parent.y - this._style.fontSize &&
-      y <= this.y + this.parent.y
+      x >= absoluteX + this.x &&
+      x <= absoluteX + this.x + width &&
+      y >= absoluteY + this.y - this._style.fontSize &&
+      y <= absoluteY + this.y
     );
   }
 }

@@ -10,10 +10,12 @@ export default class Container {
     this.isStage = options?.isStage;
   }
 
-  addChild(child) {
-    this.children.push(child);
+  addChild(...children) {
+    for (const child of children) {
+      this.children.push(child);
 
-    if (this.isStage) this.render();
+      if (this.isStage) this.render();
+    }
 
     return this;
   }
@@ -22,10 +24,11 @@ export default class Container {
     return { width: this.width, height: this.height };
   };
 
-  render(ctx) {
+  render(ctx, parents = []) {
     const context = this.ctx ?? ctx;
+    const allParents = parents.concat(this);
 
     for (const child of this.children)
-      if (typeof child.render === "function") child.render(context, this);
+      if (typeof child.render === "function") child.render(context, allParents);
   }
 }

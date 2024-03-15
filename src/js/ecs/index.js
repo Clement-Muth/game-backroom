@@ -1,33 +1,18 @@
 import Application from "./components/application.js";
-import Container from "./components/container.js";
-import Text from "./components/text.js";
+import Assets from "./components/assets.js";
+import MenuScene from "./scenes/menu/index.js";
 
 (async () => {
   const app = new Application();
 
   app.init({ background: "transparent", resizeTo: window });
 
-  const menu = new Container();
-
-  menu.x = 500;
-  menu.y = 200;
-
-  const hello = new Text({
-    text: "Hello",
-  });
-
-  const world = new Text({
-    text: "World",
-    style: {
-      fill: "orange",
-      align: "left",
-      whiteSpace: 10,
+  await Assets.load([
+    {
+      alias: "background",
+      src: "http://localhost:5500/public/static/images/menu/menu.jpg",
     },
-  });
+  ]);
 
-  world.y = 25;
-  world.interactive = true;
-
-  menu.addChild(hello).addChild(world);
-  app.addChild(menu);
+  app.addChild(new MenuScene(app.screen.width, app.screen.height).view);
 })();
