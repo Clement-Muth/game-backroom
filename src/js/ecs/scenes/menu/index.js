@@ -12,6 +12,11 @@ const getButtons = () => {
     },
   });
 
+  play.interactive = true;
+  play.onClick = () => {
+    console.log("clicked on start game");
+  };
+
   const settings = new Text({
     text: "SETTINGS  >",
     style: {

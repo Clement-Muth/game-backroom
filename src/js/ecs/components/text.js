@@ -16,6 +16,7 @@ export default class Text {
     this.text = text;
     this.interactive = false;
     this._style = { ...new TextStyle(), ...style };
+    this.onClick = () => null;
   }
 
   render(ctx, parents) {
@@ -39,5 +40,13 @@ export default class Text {
       y >= absoluteY + this.y - this._style.fontSize &&
       y <= absoluteY + this.y
     );
+  }
+
+  _onClick(x, y, ctx, parents) {
+    if (this.isMouseOver(x, y, ctx, parents)) {
+      if (typeof this.onClick === "function") {
+        this.onClick();
+      }
+    }
   }
 }
