@@ -1,7 +1,6 @@
 export default class TilingSprite {
   constructor({ texture, width, height }) {
     const image = new Image();
-
     image.src = texture;
 
     this.width = width;

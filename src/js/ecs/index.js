@@ -1,3 +1,4 @@
+import TilingSprite from "./components/TilingSprite.js";
 import Application from "./components/application.js";
 import Assets from "./components/assets.js";
 import MenuScene from "./scenes/menu/index.js";
