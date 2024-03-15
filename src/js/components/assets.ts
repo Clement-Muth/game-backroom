@@ -1,9 +1,16 @@
+type URL = {
+  alias: string;
+  src: string;
+}
+
 export default class Assets {
-  constructor(src) {
+  private src: string;
+
+  constructor(src: string) {
     this.src = src;
   }
 
-  static load = async (urls) => {
+  static load = async (urls: URL[]) => {
     for (const url of urls) {
       try {
         if (localStorage.getItem(url.alias)) continue;
@@ -13,7 +20,7 @@ export default class Assets {
         reader.readAsDataURL(blob);
         reader.onloadend = () => {
           const dataURL = reader.result;
-          localStorage.setItem(url.alias, dataURL);
+          localStorage.setItem(url.alias, dataURL as string);
         };
       } catch (error) {
         console.error(`An error occured ${url.src}:`, error);

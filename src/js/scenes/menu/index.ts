@@ -1,7 +1,7 @@
-import Container from "../../components/container.js";
-import Text from "../../components/text.js";
-import Texture from "../../components/texture.js";
-import TilingSprite from "../../components/tilingSprite.js";
+import Container from "../../components/container";
+import Text from "../../components/text";
+import Texture from "../../components/texture";
+import TilingSprite from "../../components/tilingSprite";
 
 const getButtons = () => {
   const play = new Text({
@@ -21,7 +21,6 @@ const getButtons = () => {
     text: "SETTINGS  >",
     style: {
       align: "left",
-      whiteSpace: 10,
       fontSize: 32,
       fontFamily: "DotGothic16",
     },
@@ -34,7 +33,6 @@ const getButtons = () => {
     text: "EXIT  >",
     style: {
       align: "left",
-      whiteSpace: 10,
       fontSize: 32,
       fontFamily: "DotGothic16",
     },
@@ -47,7 +45,6 @@ const getButtons = () => {
     text: "CREDITS  >",
     style: {
       align: "left",
-      whiteSpace: 10,
       fontSize: 32,
       fill: "brown",
       fontFamily: "DotGothic16",
@@ -61,7 +58,9 @@ const getButtons = () => {
 };
 
 export default class MenuScene {
-  constructor(width, height) {
+  public view: Container;
+
+  constructor(width: number, height: number) {
     this.view = new Container();
     const menu = new Container();
 
