@@ -8,8 +8,11 @@ export default class Application {
     this.ctx = canvas.getContext("2d");
     this.stage = new Container(this.ctx, { isStage: true });
     this.children = [];
+    this.screen = { width: window.innerWidth, height: window.innerHeight };
 
-    canvas.addEventListener("mousemove", this.handleMouseMove.bind(this));
+    canvas.addEventListener("mousemove", (e) =>
+      this.handleMouseMove(e, this.children, []),
+    );
     canvas.id = "canvas";
     document.body.appendChild(canvas);
 
@@ -41,27 +44,24 @@ export default class Application {
     requestAnimationFrame(this._loop.bind(this));
   }
 
-  handleMouseMove(event) {
+  handleMouseMove(event, children, parents = []) {
     const mouseX = event.clientX - this.canvas.getBoundingClientRect().left;
     const mouseY = event.clientY - this.canvas.getBoundingClientRect().top;
 
-    for (const child of this.children) {
+    for (const child of children) {
       if (child instanceof Container) {
-        for (const containerChild of child.children) {
-          if (containerChild.interactive === true) {
-            if (containerChild.isMouseOver(mouseX, mouseY, this.ctx)) {
-              this.canvas.style.cursor = "pointer";
-              return;
-            }
-          }
-        }
-      } else {
-        if (child.interactive === true) {
-          if (child.isMouseOver(mouseX, mouseY, this.ctx)) {
-            this.canvas.style.cursor = "pointer";
-            return;
-          }
-        }
+        return this.handleMouseMove(
+          event,
+          child.children,
+          parents.concat(child),
+        );
+      }
+      if (
+        child.interactive &&
+        child.isMouseOver(mouseX, mouseY, this.ctx, parents)
+      ) {
+        this.canvas.style.cursor = "pointer";
+        return;
       }
     }
     this.canvas.style.cursor = "default";

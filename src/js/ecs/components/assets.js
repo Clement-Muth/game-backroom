@@ -9,9 +9,12 @@ export default class Assets {
         if (localStorage.getItem(url.alias)) continue;
         const response = await fetch(url.src);
         const blob = await response.blob();
-        const imageSrc = URL.createObjectURL(blob);
-
-        localStorage.setItem(url.alias, imageSrc);
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const dataURL = reader.result;
+          localStorage.setItem(url.alias, dataURL);
+        };
       } catch (error) {
         console.error(`An error occured ${url.src}:`, error);
       }
