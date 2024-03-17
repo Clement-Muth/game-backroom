@@ -1,8 +1,10 @@
-import type Application from "../../components/application";
-import Container from "../../components/container";
-import Text from "../../components/text";
-import Texture from "../../components/texture";
-import TilingSprite from "../../components/tilingSprite";
+import {
+  type Application,
+  Container,
+  Text,
+  Texture,
+  TilingSprite,
+} from "../../../library";
 import GameScene from "../game";
 
 const getButtons = (app: Application) => {

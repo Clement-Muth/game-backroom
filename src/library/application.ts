@@ -1,5 +1,5 @@
-import Container from "./container";
-import type View from "./view";
+import Container from "./components/containers/container";
+import type View from "./components/containers/view";
 
 export default class Application {
   public readonly canvas: HTMLCanvasElement;

@@ -1,7 +1,4 @@
-import Container from "../../components/container";
-import Text from "../../components/text";
-import Texture from "../../components/texture";
-import TilingSprite from "../../components/tilingSprite";
+import { Container, Text, Texture, TilingSprite } from "../../../library";
 
 export default class GameScene {
   public view: Container;

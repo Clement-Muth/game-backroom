@@ -1,5 +1,5 @@
-import type Container from "./container";
-import type View from "./view";
+import type Container from "../containers/container";
+import type View from "../containers/view";
 
 export class TextStyle {
   public align?: "left" | "right" | "center";

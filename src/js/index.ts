@@ -1,5 +1,4 @@
-import Application from "./components/application";
-import Assets from "./components/assets";
+import { Application, Assets } from "../library";
 import MenuScene from "./scenes/menu";
 
 (async () => {
