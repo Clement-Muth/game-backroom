@@ -1,15 +1,8 @@
-<<<<<<< Updated upstream:src/js/ecs/scenes/menu/index.js
-import Container from "../../components/container.js";
-import Text from "../../components/text.js";
-import Texture from "../../components/texture.js";
-import TilingSprite from "../../components/tilingSprite.js";
-=======
 import Container from "../../components/container";
 import Text from "../../components/text";
 import Texture from "../../components/texture";
 import TilingSprite from "../../components/tilingSprite";
 import GameScene from "../game";
->>>>>>> Stashed changes:src/js/scenes/menu/index.ts
 
 const getButtons = (app) => {
   const play = new Text({
@@ -29,7 +22,6 @@ const getButtons = (app) => {
     text: "SETTINGS  >",
     style: {
       align: "left",
-      whiteSpace: 10,
       fontSize: 32,
       fontFamily: "DotGothic16",
     },
@@ -42,7 +34,6 @@ const getButtons = (app) => {
     text: "EXIT  >",
     style: {
       align: "left",
-      whiteSpace: 10,
       fontSize: 32,
       fontFamily: "DotGothic16",
     },
@@ -55,7 +46,6 @@ const getButtons = (app) => {
     text: "CREDITS  >",
     style: {
       align: "left",
-      whiteSpace: 10,
       fontSize: 32,
       fill: "brown",
       fontFamily: "DotGothic16",
@@ -69,13 +59,9 @@ const getButtons = (app) => {
 };
 
 export default class MenuScene {
-<<<<<<< Updated upstream:src/js/ecs/scenes/menu/index.js
-  constructor(width, height) {
-=======
   public view: Container;
 
   constructor(width: number, height: number, app) {
->>>>>>> Stashed changes:src/js/scenes/menu/index.ts
     this.view = new Container();
     const menu = new Container();
 

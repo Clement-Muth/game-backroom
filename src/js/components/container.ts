@@ -1,6 +1,13 @@
 export default class Container {
-  constructor(ctx, options) {
-    this.id = "container";
+    public ctx: any;
+    public x: number;
+    public y: number;
+    public children: any[];
+    public isStage: boolean;
+    private width: number;
+    private height: number;
+
+  constructor(ctx?: any, options?: any) {
     this.ctx = ctx;
     this.x = 0;
     this.y = 0;
@@ -10,21 +17,21 @@ export default class Container {
     this.isStage = options?.isStage;
   }
 
-  addChild(...children) {
+  public addChild(...children: any[]) {
     for (const child of children) {
       this.children.push(child);
 
-      if (this.isStage) this.render();
+      if (this.isStage) this.render(this.ctx, []);
     }
 
     return this;
   }
 
-  getSize = () => {
-    return { width: this.width, height: this.height };
-  };
+  // public getSize = () => {
+  //   return { width: this.width, height: this.height };
+  // };
 
-  render(ctx, parents = []) {
+  private render(ctx: any, parents = [] as Container[]) {
     const context = this.ctx ?? ctx;
     const allParents = parents.concat(this);
 

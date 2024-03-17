@@ -1,4 +1,13 @@
+import Container from "./container";
+
 export class TextStyle {
+  public align?: "left" | "right" | "center";
+  public fill?: string;
+  public fontFamily?: string;
+  public fontSize?: number;
+  public fontWeight?: "normal" | "bold" | "semibold";
+  public parent?: {x: number; y: number};
+
   constructor() {
     this.align = "left";
     this.fill = "white";
@@ -10,26 +19,33 @@ export class TextStyle {
 }
 
 export default class Text {
-  constructor({ text, style }) {
+  public x: number;
+  public y: number;
+  public text: string;
+  public interactive: boolean;
+  public onClick: () => void;
+  private style: TextStyle;
+
+  constructor({ text, style }: { text: string, style?: TextStyle }) {
     this.x = 0;
     this.y = 0;
     this.text = text;
     this.interactive = false;
-    this._style = { ...new TextStyle(), ...style };
+    this.style = { ...new TextStyle(), ...style };
     this.onClick = () => null;
   }
 
-  render(ctx, parents) {
+  public render = (ctx: CanvasRenderingContext2D, parents: Container[]) => {
     const absoluteX = parents.reduce((acc, parent) => acc + parent.x, 0);
     const absoluteY = parents.reduce((acc, parent) => acc + parent.y, 0);
 
-    ctx.font = `${this._style.fontWeight} ${this._style.fontSize}px ${this._style.fontFamily}`;
-    ctx.fillStyle = this._style.fill;
-    ctx.textAlign = this._style.align;
+    ctx.font = `${this.style.fontWeight} ${this.style.fontSize}px ${this.style.fontFamily}`;
+    ctx.fillStyle = this.style.fill!;
+    ctx.textAlign = this.style.align!;
     ctx.fillText(this.text, absoluteX + this.x, absoluteY + this.y);
   }
 
-  isMouseOver(x, y, ctx, parents) {
+  private isMouseOver = (x: number, y: number, ctx: CanvasRenderingContext2D, parents: Container[]) => {
     const absoluteX = parents.reduce((acc, parent) => acc + parent.x, 0);
     const absoluteY = parents.reduce((acc, parent) => acc + parent.y, 0);
     const width = ctx.measureText(this.text).width;
@@ -37,12 +53,12 @@ export default class Text {
     return (
       x >= absoluteX + this.x &&
       x <= absoluteX + this.x + width &&
-      y >= absoluteY + this.y - this._style.fontSize &&
+      y >= absoluteY + this.y - this.style.fontSize! &&
       y <= absoluteY + this.y
     );
   }
 
-  _onClick(x, y, ctx, parents) {
+  public _onClick = (x: number, y: number, ctx: CanvasRenderingContext2D, parents: Container[]) => {
     if (this.isMouseOver(x, y, ctx, parents)) {
       if (typeof this.onClick === "function") {
         this.onClick();
