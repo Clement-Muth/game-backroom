@@ -16,8 +16,4 @@ import MenuScene from "./scenes/menu";
   const menuScene = new MenuScene(app.screen.width, app.screen.height, app);
 
   app.stage.addChild(menuScene.view);
-
-  setTimeout(() => {
-    app.stage.removeChild(menuScene.view);
-  }, 2000);
 })();

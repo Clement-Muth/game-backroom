@@ -1,11 +1,13 @@
 import Container from "./components/containers/container";
 import type View from "./components/containers/view";
+import Ticker from "./components/functions/ticker";
 
 export default class Application {
   public readonly canvas: HTMLCanvasElement;
   public ctx: CanvasRenderingContext2D;
   public stage: Container;
   public screen: { width: number; height: number };
+  public ticker: Ticker;
 
   private mouseX: number;
   private mouseY: number;
@@ -19,6 +21,7 @@ export default class Application {
     this.screen = { width: window.innerWidth, height: window.innerHeight };
     this.mouseX = 0;
     this.mouseY = 0;
+    this.ticker = new Ticker();
 
     canvas.addEventListener("mousemove", (e) =>
       this.onMouseMove(e, this.stage.children, []),
