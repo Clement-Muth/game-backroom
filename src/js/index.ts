@@ -14,5 +14,11 @@ import MenuScene from "./scenes/menu";
     },
   ]);
 
-  app.addChild(new MenuScene(app.screen.width, app.screen.height).view);
+  const menuScene = new MenuScene(app.screen.width, app.screen.height, app);
+
+  app.stage.addChild(menuScene.view);
+
+  setTimeout(() => {
+    app.stage.removeChild(menuScene.view);
+  }, 2000);
 })();

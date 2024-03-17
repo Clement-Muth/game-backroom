@@ -1,4 +1,5 @@
-import Container from "./container";
+import type Container from "./container";
+import type View from "./view";
 
 export class TextStyle {
   public align?: "left" | "right" | "center";
@@ -6,7 +7,7 @@ export class TextStyle {
   public fontFamily?: string;
   public fontSize?: number;
   public fontWeight?: "normal" | "bold" | "semibold";
-  public parent?: {x: number; y: number};
+  public parent?: { x: number; y: number };
 
   constructor() {
     this.align = "left";
@@ -18,7 +19,7 @@ export class TextStyle {
   }
 }
 
-export default class Text {
+export default class Text implements View {
   public x: number;
   public y: number;
   public text: string;
@@ -26,7 +27,7 @@ export default class Text {
   public onClick: () => void;
   private style: TextStyle;
 
-  constructor({ text, style }: { text: string, style?: TextStyle }) {
+  constructor({ text, style }: { text: string; style?: TextStyle }) {
     this.x = 0;
     this.y = 0;
     this.text = text;
@@ -43,9 +44,14 @@ export default class Text {
     ctx.fillStyle = this.style.fill!;
     ctx.textAlign = this.style.align!;
     ctx.fillText(this.text, absoluteX + this.x, absoluteY + this.y);
-  }
+  };
 
-  private isMouseOver = (x: number, y: number, ctx: CanvasRenderingContext2D, parents: Container[]) => {
+  public isMouseOver = (
+    x: number,
+    y: number,
+    ctx: CanvasRenderingContext2D,
+    parents: Container[],
+  ) => {
     const absoluteX = parents.reduce((acc, parent) => acc + parent.x, 0);
     const absoluteY = parents.reduce((acc, parent) => acc + parent.y, 0);
     const width = ctx.measureText(this.text).width;
@@ -56,13 +62,18 @@ export default class Text {
       y >= absoluteY + this.y - this.style.fontSize! &&
       y <= absoluteY + this.y
     );
-  }
+  };
 
-  public _onClick = (x: number, y: number, ctx: CanvasRenderingContext2D, parents: Container[]) => {
+  public _onClick = (
+    x: number,
+    y: number,
+    ctx: CanvasRenderingContext2D,
+    parents: Container[],
+  ) => {
     if (this.isMouseOver(x, y, ctx, parents)) {
       if (typeof this.onClick === "function") {
         this.onClick();
       }
     }
-  }
+  };
 }

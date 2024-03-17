@@ -1,9 +1,11 @@
+import type Application from "../../components/application";
 import Container from "../../components/container";
 import Text from "../../components/text";
 import Texture from "../../components/texture";
 import TilingSprite from "../../components/tilingSprite";
+import GameScene from "../game";
 
-const getButtons = () => {
+const getButtons = (app: Application) => {
   const play = new Text({
     text: "PLAY TAPE  >",
     style: {
@@ -14,7 +16,7 @@ const getButtons = () => {
 
   play.interactive = true;
   play.onClick = () => {
-    console.log("clicked on start game");
+    app.stage.addChild(new GameScene(app.screen.width, app.screen.height).view);
   };
 
   const settings = new Text({
@@ -60,7 +62,7 @@ const getButtons = () => {
 export default class MenuScene {
   public view: Container;
 
-  constructor(width: number, height: number) {
+  constructor(width: number, height: number, app: Application) {
     this.view = new Container();
     const menu = new Container();
 
@@ -68,7 +70,7 @@ export default class MenuScene {
       text: "THE BACKROOMS",
       style: { fontSize: 48, fontFamily: "DotGothic16" },
     });
-    const { credits, exit, play, settings } = getButtons();
+    const { credits, exit, play, settings } = getButtons(app);
 
     const texture = Texture.from("background");
 

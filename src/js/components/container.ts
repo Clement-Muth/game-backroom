@@ -1,23 +1,19 @@
 export default class Container {
-    public ctx: any;
-    public x: number;
-    public y: number;
-    public children: any[];
-    public isStage: boolean;
-    private width: number;
-    private height: number;
+  public ctx: CanvasRenderingContext2D;
+  public x: number;
+  public y: number;
+  public children: any[];
+  public isStage: boolean;
 
   constructor(ctx?: any, options?: any) {
     this.ctx = ctx;
     this.x = 0;
     this.y = 0;
-    this.width = 500;
-    this.height = 500;
     this.children = [];
     this.isStage = options?.isStage;
   }
 
-  public addChild(...children: any[]) {
+  public addChild<U extends any[]>(...children: U): U[0] {
     for (const child of children) {
       this.children.push(child);
 
@@ -27,15 +23,17 @@ export default class Container {
     return this;
   }
 
-  // public getSize = () => {
-  //   return { width: this.width, height: this.height };
-  // };
+  public removeChild(childToRemove: any) {
+    const index = this.children.indexOf(childToRemove);
+    if (index !== -1) this.children.splice(index, 1);
 
-  private render(ctx: any, parents = [] as Container[]) {
+    return this;
+  }
+
+  public render(ctx: any, parents = [] as Container[]) {
     const context = this.ctx ?? ctx;
     const allParents = parents.concat(this);
 
-    for (const child of this.children)
-      if (typeof child.render === "function") child.render(context, allParents);
+    for (const child of this.children) child.render(context, allParents);
   }
 }
