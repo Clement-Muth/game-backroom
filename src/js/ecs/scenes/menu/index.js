@@ -1,9 +1,17 @@
+<<<<<<< Updated upstream:src/js/ecs/scenes/menu/index.js
 import Container from "../../components/container.js";
 import Text from "../../components/text.js";
 import Texture from "../../components/texture.js";
 import TilingSprite from "../../components/tilingSprite.js";
+=======
+import Container from "../../components/container";
+import Text from "../../components/text";
+import Texture from "../../components/texture";
+import TilingSprite from "../../components/tilingSprite";
+import GameScene from "../game";
+>>>>>>> Stashed changes:src/js/scenes/menu/index.ts
 
-const getButtons = () => {
+const getButtons = (app) => {
   const play = new Text({
     text: "PLAY TAPE  >",
     style: {
@@ -14,7 +22,7 @@ const getButtons = () => {
 
   play.interactive = true;
   play.onClick = () => {
-    console.log("clicked on start game");
+    app.addChild(new GameScene(app.screen.width, app.screen.height).view);
   };
 
   const settings = new Text({
@@ -61,7 +69,13 @@ const getButtons = () => {
 };
 
 export default class MenuScene {
+<<<<<<< Updated upstream:src/js/ecs/scenes/menu/index.js
   constructor(width, height) {
+=======
+  public view: Container;
+
+  constructor(width: number, height: number, app) {
+>>>>>>> Stashed changes:src/js/scenes/menu/index.ts
     this.view = new Container();
     const menu = new Container();
 
@@ -69,7 +83,7 @@ export default class MenuScene {
       text: "THE BACKROOMS",
       style: { fontSize: 48, fontFamily: "DotGothic16" },
     });
-    const { credits, exit, play, settings } = getButtons();
+    const { credits, exit, play, settings } = getButtons(app);
 
     const texture = Texture.from("background");
 
