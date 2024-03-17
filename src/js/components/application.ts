@@ -1,4 +1,5 @@
 import Container from "./container";
+import type View from "./view";
 
 export default class Application {
   public readonly canvas: HTMLCanvasElement;
@@ -6,7 +7,6 @@ export default class Application {
   public stage: Container;
   public screen: { width: number; height: number };
 
-  private children: any[];
   private mouseX: number;
   private mouseY: number;
 
@@ -16,16 +16,15 @@ export default class Application {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d")!;
     this.stage = new Container(this.ctx, { isStage: true });
-    this.children = [];
     this.screen = { width: window.innerWidth, height: window.innerHeight };
     this.mouseX = 0;
     this.mouseY = 0;
 
     canvas.addEventListener("mousemove", (e) =>
-      this.onMouseMove(e, this.children, []),
+      this.onMouseMove(e, this.stage.children, []),
     );
     canvas.addEventListener("click", (e) =>
-      this.onClick(e, this.children, []),
+      this.onClick(e, this.stage.children, []),
     );
     canvas.id = "canvas";
     document.body.appendChild(canvas);
@@ -33,33 +32,34 @@ export default class Application {
     this.loop();
   }
 
-  public init = ({ background, resizeTo }: {background: string, resizeTo: any}) => {
+  public init = ({
+    background,
+    resizeTo,
+  }: { background: string; resizeTo: any }) => {
     window.addEventListener("resize", this.onResize);
     this.ctx.fillStyle = background;
     this.canvas.width = resizeTo.innerWidth;
     this.canvas.height = resizeTo.innerHeight;
   };
 
-  public addChild = (child: Container | Text) => {
-    this.children.push(child);
-
-    return this;
-  }
-
   private onResize = () => {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-  }
+  };
 
   private loop = () => {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    for (const child of this.children) child.render(this.ctx);
+    for (const child of this.stage.children) child.render(this.ctx, []);
 
     requestAnimationFrame(this.loop.bind(this));
-  }
+  };
 
-  private onMouseMove = (event: MouseEvent, children: any, parents = [] as Container[]): void => {
+  private onMouseMove = (
+    event: MouseEvent,
+    children: View[],
+    parents = [] as Container[],
+  ): void => {
     this.mouseX = event.clientX - this.canvas.getBoundingClientRect().left;
     this.mouseY = event.clientY - this.canvas.getBoundingClientRect().top;
 
@@ -77,16 +77,21 @@ export default class Application {
       }
     }
     this.canvas.style.cursor = "default";
-  }
+  };
 
-  private onClick = (event: MouseEvent, children: any[], parents = [] as Container[]): void => {
+  private onClick = (
+    event: MouseEvent,
+    children: any[],
+    parents = [] as Container[],
+  ): void => {
     for (const child of children) {
       if (child instanceof Container) {
-        return this.onClick(event, child.children, parents.concat(child));
+        this.onClick(event, child.children, parents.concat(child));
+        return;
       }
       if (child.interactive === true && typeof child._onClick === "function") {
         child._onClick(this.mouseX, this.mouseY, this.ctx, parents);
       }
     }
-  }
+  };
 }
