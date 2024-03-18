@@ -29,7 +29,7 @@ export default class GameScene {
     document.addEventListener("keypress", (e) => {
       switch (e.code as Key) {
         case Key.Forward:
-          if (this.currentView < 3) {
+          if (this.currentView < 12) {
             this.currentView++;
             const newTexture = Texture.from(`map${this.currentView}`);
 

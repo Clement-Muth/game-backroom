@@ -1,3 +1,4 @@
+import type DataEngine from "../../public/game-engine.json";
 import Container from "./components/containers/container";
 import type View from "./components/containers/view";
 import Ticker from "./components/functions/ticker";
@@ -8,6 +9,7 @@ export default class Application {
   public stage: Container;
   public screen: { width: number; height: number };
   public ticker: Ticker;
+  public dataEngine: typeof DataEngine;
 
   private mouseX: number;
   private mouseY: number;
@@ -35,7 +37,7 @@ export default class Application {
     this.loop();
   }
 
-  public init = ({
+  public init = async ({
     background,
     resizeTo,
   }: { background: string; resizeTo: any }) => {
@@ -43,6 +45,8 @@ export default class Application {
     this.ctx.fillStyle = background;
     this.canvas.width = resizeTo.innerWidth;
     this.canvas.height = resizeTo.innerHeight;
+
+    this.dataEngine = await (await fetch("./public/game-engine.json")).json();
   };
 
   private onResize = () => {

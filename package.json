@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "npx webpack build",
-    "dev": "npx webpack & npx live-server"
+    "dev": "npx webpack -w & npx live-server"
   },
   "repository": "git@github.com:Clement-Muth/game-backroom.git",
   "author": "Clement-Muth <clementmuth@gmail.com>",
