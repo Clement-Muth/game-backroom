@@ -5,6 +5,7 @@ interface TilingSpriteProps {
 }
 
 export default class TilingSprite {
+  public texture: string;
   private width: number;
   private height: number;
   private image: HTMLImageElement;
@@ -13,12 +14,17 @@ export default class TilingSprite {
     const image = new Image();
     image.src = texture;
 
+    this.texture = texture;
     this.width = width;
     this.height = height;
     this.image = image;
   }
 
-  render = (ctx: CanvasRenderingContext2D) => {
+  public update = (texture: string) => {
+    this.image.src = texture;
+  };
+
+  public render = (ctx: CanvasRenderingContext2D) => {
     ctx.drawImage(this.image, 0, 0, this.width, this.height);
   };
 }
