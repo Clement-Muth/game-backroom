@@ -77,7 +77,6 @@ export default class MenuScene {
 
     const texture = Texture.from("background");
 
-    console.log(texture);
     const background = new TilingSprite({
       texture: texture,
       width,
