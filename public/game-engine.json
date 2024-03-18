@@ -1,0 +1,60 @@
+{
+  "assets": {
+    "menu": {
+      "background": {
+        "alias": "background",
+        "src": "/public/static/images/menu/menu.jpg"
+      }
+    },
+    "map": [
+      {
+        "alias": "map1",
+        "src": "/public/static/images/game/map/map1.jpeg"
+      },
+      {
+        "alias": "map2",
+        "src": "/public/static/images/game/map/map2.jpeg"
+      },
+      {
+        "alias": "map3",
+        "src": "/public/static/images/game/map/map3.jpeg"
+      },
+      {
+        "alias": "map4",
+        "src": "/public/static/images/game/map/map4.jpeg"
+      },
+      {
+        "alias": "map5",
+        "src": "/public/static/images/game/map/map5.jpeg"
+      },
+      {
+        "alias": "map6",
+        "src": "/public/static/images/game/map/map6.jpeg"
+      },
+      {
+        "alias": "map7",
+        "src": "/public/static/images/game/map/map7.jpeg"
+      },
+      {
+        "alias": "map8",
+        "src": "/public/static/images/game/map/map8.jpeg"
+      },
+      {
+        "alias": "map9",
+        "src": "/public/static/images/game/map/map9.jpeg"
+      },
+      {
+        "alias": "map10",
+        "src": "/public/static/images/game/map/map10.jpeg"
+      },
+      {
+        "alias": "map11",
+        "src": "/public/static/images/game/map/map11.jpeg"
+      },
+      {
+        "alias": "map12",
+        "src": "/public/static/images/game/map/map12.jpeg"
+      }
+    ]
+  }
+}
