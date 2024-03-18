@@ -1,3 +1,5 @@
+const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+
 module.exports = {
   entry: "./src/js/index.ts",
   output: {
@@ -28,6 +30,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new WorkboxWebpackPlugin.GenerateSW({
+      swDest: "sw.js",
+    }),
+  ],
   optimization: {
     minimize: true,
   },

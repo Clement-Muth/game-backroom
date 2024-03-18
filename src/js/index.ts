@@ -1,4 +1,5 @@
 import { Application, Assets } from "../library";
+import "../library/sw";
 import MenuScene from "./scenes/menu";
 
 (async () => {

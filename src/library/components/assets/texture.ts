@@ -1,10 +1,12 @@
+import Assets from "./assets";
+
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export default class Texture {
-  static from = (label: string) => {
-    const texture = localStorage.getItem(label);
+  static from = (alias: string): string => {
+    const src = Assets.getAsset(alias);
 
-    if (!texture) throw new Error(`Texture does not exist: ${label}`);
+    if (!src) throw new Error("Texture not found");
 
-    return texture;
+    return src;
   };
 }
