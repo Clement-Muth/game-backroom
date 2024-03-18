@@ -7,7 +7,7 @@ import {
 } from "../../../library";
 import GameScene from "../game";
 
-const getButtons = (app: Application) => {
+const getButtons = (scene, app: Application) => {
   const play = new Text({
     text: "PLAY TAPE  >",
     style: {
@@ -18,6 +18,7 @@ const getButtons = (app: Application) => {
 
   play.interactive = true;
   play.onClick = () => {
+    app.stage.removeChild(scene.view);
     app.stage.addChild(new GameScene(app.screen.width, app.screen.height).view);
   };
 
@@ -72,10 +73,11 @@ export default class MenuScene {
       text: "THE BACKROOMS",
       style: { fontSize: 48, fontFamily: "DotGothic16" },
     });
-    const { credits, exit, play, settings } = getButtons(app);
+    const { credits, exit, play, settings } = getButtons(this, app);
 
     const texture = Texture.from("background");
 
+    console.log(texture);
     const background = new TilingSprite({
       texture: texture,
       width,
