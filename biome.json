@@ -15,6 +15,11 @@
 			}
 		}
 	},
+	"files": {
+		"ignore": [
+			"./public/game-engine.json"
+		]
+	},
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": false,

@@ -8,8 +8,8 @@ import MenuScene from "./scenes/menu";
   await app.init({ background: "transparent", resizeTo: window });
 
   await Assets.load([
-    app.dataEngine.assets.menu.background,
-    ...app.dataEngine.assets.map,
+    Application.dataEngine.assets.menu.background,
+    ...Application.dataEngine.assets.map,
   ]);
 
   const menuScene = new MenuScene(app.screen.width, app.screen.height, app);

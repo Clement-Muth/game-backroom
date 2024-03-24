@@ -7,7 +7,7 @@ import {
 } from "../../../library";
 import GameScene from "../game";
 
-const getButtons = (scene, app: Application) => {
+const getButtons = (scene: MenuScene, app: Application) => {
   const play = new Text({
     text: "PLAY TAPE  >",
     style: {
