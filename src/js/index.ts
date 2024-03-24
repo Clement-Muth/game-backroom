@@ -9,7 +9,7 @@ import MenuScene from "./scenes/menu";
 
   await Assets.load([
     Application.dataEngine.assets.menu.background,
-    ...Application.dataEngine.assets.map,
+    ...[...Array(Application.dataEngine.assets.map.max)].map((_, i) => ({alias: `map${i}`, src: `${Application.dataEngine.assets.map.path}/map${i}.jpeg`})),
   ]);
 
   const menuScene = new MenuScene(app.screen.width, app.screen.height, app);

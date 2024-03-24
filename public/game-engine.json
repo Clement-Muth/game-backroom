@@ -6,214 +6,23 @@
         "src": "/public/static/images/menu/menu.jpg"
       }
     },
-    "map": [
-      {
-        "alias": "map0",
-        "src": "/public/static/images/game/map/map0.jpeg"
-      },
-      {
-        "alias": "map1",
-        "src": "/public/static/images/game/map/map1.jpeg"
-      },
-      {
-        "alias": "map2",
-        "src": "/public/static/images/game/map/map2.jpeg"
-      },
-      {
-        "alias": "map3",
-        "src": "/public/static/images/game/map/map3.jpeg"
-      },
-      {
-        "alias": "map4",
-        "src": "/public/static/images/game/map/map4.jpeg"
-      },
-      {
-        "alias": "map5",
-        "src": "/public/static/images/game/map/map5.jpeg"
-      },
-      {
-        "alias": "map6",
-        "src": "/public/static/images/game/map/map6.jpeg"
-      },
-      {
-        "alias": "map7",
-        "src": "/public/static/images/game/map/map7.jpeg"
-      },
-      {
-        "alias": "map8",
-        "src": "/public/static/images/game/map/map8.jpeg"
-      },
-      {
-        "alias": "map9",
-        "src": "/public/static/images/game/map/map9.jpeg"
-      },
-      {
-        "alias": "map10",
-        "src": "/public/static/images/game/map/map10.jpeg"
-      },
-      {
-        "alias": "map11",
-        "src": "/public/static/images/game/map/map11.jpeg"
-      },
-      {
-        "alias": "map12",
-        "src": "/public/static/images/game/map/map12.jpeg"
-      },
-      {
-        "alias": "map13",
-        "src": "/public/static/images/game/map/map13.jpeg"
-      },
-      {
-        "alias": "map14",
-        "src": "/public/static/images/game/map/map14.jpeg"
-      },
-      {
-        "alias": "map15",
-        "src": "/public/static/images/game/map/map15.jpeg"
-      },
-      {
-        "alias": "map16",
-        "src": "/public/static/images/game/map/map16.jpeg"
-      },
-      {
-        "alias": "map17",
-        "src": "/public/static/images/game/map/map17.jpeg"
-      },
-      {
-        "alias": "map18",
-        "src": "/public/static/images/game/map/map18.jpeg"
-      },
-      {
-        "alias": "map19",
-        "src": "/public/static/images/game/map/map19.jpeg"
-      },
-      {
-        "alias": "map20",
-        "src": "/public/static/images/game/map/map20.jpeg"
-      },
-      {
-        "alias": "map21",
-        "src": "/public/static/images/game/map/map21.jpeg"
-      },
-      {
-        "alias": "map22",
-        "src": "/public/static/images/game/map/map22.jpeg"
-      },
-      {
-        "alias": "map23",
-        "src": "/public/static/images/game/map/map23.jpeg"
-      },
-      {
-        "alias": "map24",
-        "src": "/public/static/images/game/map/map24.jpeg"
-      },
-      {
-        "alias": "map25",
-        "src": "/public/static/images/game/map/map25.jpeg"
-      },
-      {
-        "alias": "map26",
-        "src": "/public/static/images/game/map/map26.jpeg"
-      },
-      {
-        "alias": "map27",
-        "src": "/public/static/images/game/map/map27.jpeg"
-      },
-      {
-        "alias": "map28",
-        "src": "/public/static/images/game/map/map28.jpeg"
-      },
-      {
-        "alias": "map29",
-        "src": "/public/static/images/game/map/map29.jpeg"
-      },
-      {
-        "alias": "map30",
-        "src": "/public/static/images/game/map/map30.jpeg"
-      },
-      {
-        "alias": "map31",
-        "src": "/public/static/images/game/map/map31.jpeg"
-      },
-      {
-        "alias": "map32",
-        "src": "/public/static/images/game/map/map32.jpeg"
-      },
-      {
-        "alias": "map33",
-        "src": "/public/static/images/game/map/map33.jpeg"
-      },
-      {
-        "alias": "map34",
-        "src": "/public/static/images/game/map/map34.jpeg"
-      },
-      {
-        "alias": "map35",
-        "src": "/public/static/images/game/map/map35.jpeg"
-      },
-      {
-        "alias": "map36",
-        "src": "/public/static/images/game/map/map36.jpeg"
-      },
-      {
-        "alias": "map37",
-        "src": "/public/static/images/game/map/map37.jpeg"
-      },
-      {
-        "alias": "map38",
-        "src": "/public/static/images/game/map/map38.jpeg"
-      },
-      {
-        "alias": "map39",
-        "src": "/public/static/images/game/map/map39.jpeg"
-      },
-      {
-        "alias": "map40",
-        "src": "/public/static/images/game/map/map40.jpeg"
-      },
-      {
-        "alias": "map41",
-        "src": "/public/static/images/game/map/map41.jpeg"
-      },
-      {
-        "alias": "map42",
-        "src": "/public/static/images/game/map/map42.jpeg"
-      },
-      {
-        "alias": "map43",
-        "src": "/public/static/images/game/map/map43.jpeg"
-      },
-      {
-        "alias": "map44",
-        "src": "/public/static/images/game/map/map44.jpeg"
-      },
-      {
-        "alias": "map45",
-        "src": "/public/static/images/game/map/map45.jpeg"
-      },
-      {
-        "alias": "map46",
-        "src": "/public/static/images/game/map/map46.jpeg"
-      },
-      {
-        "alias": "map47",
-        "src": "/public/static/images/game/map/map47.jpeg"
-      }
-    ]
+    "map": {
+      "path": "/public/static/images/game/map",
+      "max": 99
+    }
   },
   "map": [
-    [{},{"top": 26,"bottom": 46},{}],
-    [{},{"top": 25,"bottom": 45},{}],
-    [{"left":42,"right":43},{"top": 24,"bottom": 38,"left":40,"right":39},{"right":41,"left":44}],
-    [{},{ "top": 23,"bottom": 35,"left": 36,"right": 37},{}],
-    [{},{"top": 22,"bottom": 34,"left": 32, "right": 33},{}],
-    [{},{"top": 21,"bottom": 31},{}],
-    [{},{"top": 20,"bottom": 30},{}],
-    [{"top": 11,"bottom": 15,"right": 14,"left": 47},{"top": 19,"bottom": 29},{}],
-    [{"top": 7,"right": 8,"bottom": 12},{"top": 16,"bottom": 28,"left": 10,"right": 9},{}],
-    [{"left": 5,"top": 6,"bottom": 17,"right": 18},{"top": 0,"bottom": 27,"left": 4,"right": 1},{"left": 3,"right": 2}]
-  ],
-  "positions": {
-    "__default": 28
-  }
+    [{"bottom": 62,"right":63,"top":55, "left": 55},{"top": 48,"bottom": 76,"left": 49,"right":50},{"left":61,"right": 51, "bottom": 52, "top": 55}, {"left":91,"bottom":92,"right":93,"top":94}, {"top":95,"left":96,"right":97,"bottom":98}],
+    [{"top":87,"left":88,"bottom":89,"right":90},{"top": 57,"bottom": 77, "left":58, "right": 60},{"bottom": 53,"left":54, "right": 55, "top": 56}, {}, {}],
+    [{"top":83,"left":84,"right":85,"bottom":86},{"left":68, "top": 26,"bottom": 46, "right":69},{"bottom": 64,"left":67,"top":66,"right":65}, {}, {}],
+    [{"left":79,"bottom":80,"top":82,"right":81},{"top": 25,"bottom": 45, "left":74,"right": 75},{"bottom":70,"right":71,"left":72,"top":73}, {}, {}],
+    [{"left":42,"right":43},{"top": 24,"bottom": 38,"left":40,"right":39},{"right":41,"left":44}, {}, {}],
+    [{},{ "top": 23,"bottom": 35,"left": 36,"right": 37},{}, {}, {}],
+    [{},{"top": 22,"bottom": 31,"left": 32, "right": 33},{}, {}, {}],
+    [{},{"top": 21,"bottom": 78},{}, {}, {}],
+    [{},{"top": 20,"bottom": 30},{}, {}, {}],
+    [{"top": 11,"bottom": 15,"right": 14,"left": 47},{"top": 19,"bottom": 29},{}, {}, {}],
+    [{"top": 7,"right": 8,"bottom": 12},{"top": 16,"bottom": 28,"left": 10,"right": 9},{}, {}, {}],
+    [{"left": 5,"top": 6,"bottom": 17,"right": 18},{"top": 0,"bottom": 27,"left": 4,"right": 1},{"left": 3,"right": 2}, {}, {}]
+  ]
 }
