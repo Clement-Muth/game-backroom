@@ -1,9 +1,11 @@
 import {
   Application,
   Container,
+  Text,
   Texture,
   TilingSprite,
 } from "../../../library";
+import MenuScene from "../menu";
 
 enum Key {
   Forward = "KeyW",
@@ -24,18 +26,43 @@ export default class GameScene {
   private currentPosition: number;
   private currentOrientation: Orientation;
   private screen: { x: number; y: number };
-  private readonly initialPosition: number;
+  private currentState: TilingSprite;
+  private readonly exitButton: Text;
 
-  constructor(width: number, height: number) {
+  constructor(width: number, height: number, app: Application) {
     this.view = new Container();
     this.view.x = 180;
     this.view.y = 240;
     this.screen = { x: width, y: height };
-    this.initialPosition = Application.dataEngine.positions.__default;
-    this.currentPosition = this.initialPosition;
+    this.currentPosition = 0;
     this.currentOrientation = Orientation.North;
 
     this.updateBackground(0);
+
+    for (let i = 0; i < Application.dataEngine.map.length; i++)
+      this.currentPosition += Application.dataEngine.map[i].length;
+
+    this.currentPosition -= 4;
+
+    this.exitButton = new Text({
+      text: "Exit Backroom",
+      style: {
+        align: "left",
+        fontSize: 32,
+        fill: "brown",
+        fontFamily: "DotGothic16",
+      },
+    });
+
+    this.exitButton.x = 500;
+    this.exitButton.y = 350;
+
+    this.exitButton.interactive = true;
+
+    this.exitButton.onClick = () =>
+      app.stage
+        .removeChild(this.view)
+        .addChild(new MenuScene(app.screen.width, app.screen.height, app).view);
 
     document.addEventListener("keypress", (e) => {
       const directionMap = {
@@ -72,6 +99,12 @@ export default class GameScene {
           directionMap[e.code as Key][this.currentOrientation];
         this.updateBackground(newPosition);
       }
+
+      if (
+        this.currentPosition === 4 &&
+        this.currentOrientation === Orientation.North
+      )
+        this.view.addChild(this.exitButton);
     });
   }
 
@@ -83,9 +116,9 @@ export default class GameScene {
       height: this.screen.y,
     });
 
+    this.view.removeChild(this.currentState);
+    this.currentState = background;
     this.view.addChild(background);
-    // TODO – Remove child after changing view
-    // this.view.removeChildren();
   }
 
   private getNextPosition(direction: Key): number | undefined {

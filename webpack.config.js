@@ -5,7 +5,7 @@ module.exports = {
   output: {
     filename: "./bundle.js",
   },
-  mode: "development",
+  mode: "production",
   devtool: "source-map",
   resolve: {
     extensions: [".webpack.js", ".web.js", ".ts", ".js"],

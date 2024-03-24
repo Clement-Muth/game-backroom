@@ -19,7 +19,9 @@ const getButtons = (scene: MenuScene, app: Application) => {
   play.interactive = true;
   play.onClick = () => {
     app.stage.removeChild(scene.view);
-    app.stage.addChild(new GameScene(app.screen.width, app.screen.height).view);
+    app.stage.addChild(
+      new GameScene(app.screen.width, app.screen.height, app).view,
+    );
   };
 
   const settings = new Text({
