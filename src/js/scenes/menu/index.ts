@@ -5,6 +5,7 @@ import {
   Texture,
   TilingSprite,
 } from "../../../library";
+import Sound from "../../../library/components/sounds/sound";
 import GameScene from "../game";
 
 const getButtons = (scene: MenuScene, app: Application) => {
@@ -22,6 +23,9 @@ const getButtons = (scene: MenuScene, app: Application) => {
     app.stage.addChild(
       new GameScene(app.screen.width, app.screen.height, app).view,
     );
+    const audio = new Sound("/public/static/music/ambience.mp3");
+
+    audio.play();
   };
 
   const settings = new Text({
