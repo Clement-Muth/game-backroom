@@ -13,9 +13,10 @@
     <title>Backroom</title>
 </head>
 
-<body onload="import('./dist/bundle.js')">
+<body onload="import(`${window.location.href}/dist/bundle.js`)">
     <main>
-        <div class="scanlines"></div>
+        <div class=" scanlines">
+        </div>
 
         <div class="intro-wrap"
             style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; width: 80%; margin: auto; height: 90%; z-index: 10000;">
