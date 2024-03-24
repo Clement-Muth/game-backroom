@@ -9,7 +9,8 @@ export default class Application {
   public stage: Container;
   public screen: { width: number; height: number };
   public ticker: Ticker;
-  public dataEngine: typeof DataEngine;
+
+  static dataEngine: typeof DataEngine;
 
   private mouseX: number;
   private mouseY: number;
@@ -46,7 +47,9 @@ export default class Application {
     this.canvas.width = resizeTo.innerWidth;
     this.canvas.height = resizeTo.innerHeight;
 
-    this.dataEngine = await (await fetch("./public/game-engine.json")).json();
+    Application.dataEngine = await (
+      await fetch("./public/game-engine.json")
+    ).json();
   };
 
   private onResize = () => {
